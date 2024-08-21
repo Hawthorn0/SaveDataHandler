@@ -1,3 +1,9 @@
+/*
+ * Made by Hawthorn Wood
+ *
+ * I'm really not sure if this is optimal
+ */
+
 package birdthorn;
 
 import com.google.gson.JsonObject;
@@ -53,7 +59,8 @@ public class SaveDataHandler {
     /**
      * Gets a value as a specified location.
      * If the value is not there, creates a value (the one listed in parameters) in its place.
-     * @param key The path to the value.
+     *
+     * @param key   The path to the value.
      * @param value The value created if the path does not yield a value.
      * @return Returns the value either gotten or created.
      */
@@ -67,6 +74,7 @@ public class SaveDataHandler {
         writeTheFile();
         return objectParser.get(keyParts[keyParts.length - 1]).getAsJsonObject();
     }
+
     public static float getJsonObject(String key, float value) {
         String[] keyParts = key.split("/");
         JsonObject objectParser = getJsonObjectParser(keyParts);
@@ -77,6 +85,7 @@ public class SaveDataHandler {
         writeTheFile();
         return objectParser.get(keyParts[keyParts.length - 1]).getAsFloat();
     }
+
     public static double getJsonObject(String key, double value) {
         String[] keyParts = key.split("/");
         JsonObject objectParser = getJsonObjectParser(keyParts);
@@ -87,6 +96,7 @@ public class SaveDataHandler {
         writeTheFile();
         return objectParser.get(keyParts[keyParts.length - 1]).getAsDouble();
     }
+
     public static int getJsonObject(String key, int value) {
         String[] keyParts = key.split("/");
         JsonObject objectParser = getJsonObjectParser(keyParts);
@@ -97,6 +107,7 @@ public class SaveDataHandler {
         writeTheFile();
         return objectParser.get(keyParts[keyParts.length - 1]).getAsInt();
     }
+
     public static boolean getJsonObject(String key, boolean value) {
         String[] keyParts = key.split("/");
         JsonObject objectParser = getJsonObjectParser(keyParts);
@@ -107,6 +118,7 @@ public class SaveDataHandler {
         writeTheFile();
         return objectParser.get(keyParts[keyParts.length - 1]).getAsBoolean();
     }
+
     public static String getJsonObject(String key, String value) {
         String[] keyParts = key.split("/");
         JsonObject objectParser = getJsonObjectParser(keyParts);
@@ -137,6 +149,34 @@ public class SaveDataHandler {
         }
 
         return objectParser;
+    }
+
+    /**
+     * Gets a value as a specified location.
+     * If the value is not there, returns null.
+     *
+     * @param key The path to the value.
+     * @return Returns the value in String form.
+     */
+    public static String getJsonObject(String key) {
+        String[] keyParts = key.split("/");
+        if (saveDataJson == null) {
+            loadSaveData();
+        }
+
+        JsonObject objectParser = saveDataJson;
+
+        for (int i = 0; i < keyParts.length - 1; i++) {
+            if (!objectParser.has(keyParts[i])) {
+                return null;
+            }
+            objectParser = objectParser.get(keyParts[i]).getAsJsonObject();
+        }
+
+        if (!objectParser.has(keyParts[keyParts.length - 1])) {
+            return null;
+        }
+        return objectParser.get(keyParts[keyParts.length - 1]).getAsString().toString();
     }
 
 }

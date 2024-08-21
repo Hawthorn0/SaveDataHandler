@@ -1,8 +1,7 @@
 <h1>Behold, my Save Data Handler</h1>
 <h3>I use this when making games!</h2>
 <hr>
-<h2>Quick note, the only file you need is src/main/java/birdthorn/SaveDataHandler.java</h2>
-<h4>So just copy and paste it into whereever you need it</h3>
+<h2>Quick note, the only file you need from this is src/main/java/birdthorn/SaveDataHandler.java. However, you also need the gson library</h2>
 <br>
 <h2>FAQ:</h2>
 <h4>Q: What does this do?</h4>
